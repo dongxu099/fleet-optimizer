@@ -178,7 +178,7 @@ export default function HomePage() {
 
                 <div className="navbar-profiles">
                     {!activeProfile && (
-                        <span className="navbar-hint">👉 Click a profile to start:</span>
+                        <span className="navbar-hint">👉 Click a sample profile to start</span>
                     )}
                     {PROFILES.map(profile => (
                         <button
