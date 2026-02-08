@@ -12,6 +12,9 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+# Set dummy token for build time (actual token injected at runtime)
+ENV AI_BUILDER_TOKEN=dummy_build_token
+
 # Build the Next.js app in standalone mode
 RUN npm run build
 
