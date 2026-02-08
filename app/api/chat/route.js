@@ -1,11 +1,9 @@
 import OpenAI from 'openai';
 
-// Fallback token for development (Google Drive has permission issues with .env)
-const API_TOKEN = process.env.AI_BUILDER_TOKEN || 'sk_92ffe728_d69f8a3f7fb3c999d0d2ad698e3418b7998a';
-
+// AI_BUILDER_TOKEN is automatically injected during deployment
 const openai = new OpenAI({
     baseURL: 'https://space.ai-builders.com/backend/v1',
-    apiKey: API_TOKEN,
+    apiKey: process.env.AI_BUILDER_TOKEN,
 });
 
 const SYSTEM_PROMPT = `You are a Senior Solutions Architect specializing in Amazon DynamoDB optimization. You're helping analyze a simulated fleet of DynamoDB tables to identify cost-saving opportunities.
