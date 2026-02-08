@@ -276,7 +276,11 @@ export default function HomePage() {
                                             <th onClick={() => handleSort('tableName')} className={sortConfig.key === 'tableName' ? 'sorted' : ''}>
                                                 Table Name {sortConfig.key === 'tableName' && (sortConfig.direction === 'desc' ? <ChevronDown size={12} /> : <ChevronUp size={12} />)}
                                             </th>
-                                            <th onClick={() => handleSort('wasteScore')} className={sortConfig.key === 'wasteScore' ? 'sorted' : ''}>
+                                            <th
+                                                onClick={() => handleSort('wasteScore')}
+                                                className={sortConfig.key === 'wasteScore' ? 'sorted' : ''}
+                                                title="Waste Score = (1 - Utilization%) × Cost Weight. Higher scores indicate tables with low utilization and high spend – top candidates for optimization."
+                                            >
                                                 Waste Score {sortConfig.key === 'wasteScore' && (sortConfig.direction === 'desc' ? <ChevronDown size={12} /> : <ChevronUp size={12} />)}
                                             </th>
                                             <th onClick={() => handleSort('monthlySpend')} className={sortConfig.key === 'monthlySpend' ? 'sorted' : ''}>
