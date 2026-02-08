@@ -103,9 +103,14 @@ export default function HomePage() {
         setActiveProfile(profileId);
         const data = generateFleetData(profileId);
         setFleetData(data);
+
+        // Get recommendations to show consistent #1 priority
+        const recs = generateRecommendations(data, 10);
+        const topRec = recs[0];
+
         setMessages([{
             role: 'assistant',
-            content: `Fleet analysis complete! I found ${data.length} tables in your ${profileId} fleet. The top optimization opportunity is **${data[0]?.tableName}** with a waste score of ${Math.round(data[0]?.wasteScore * 100)}%. Would you like me to explain why this table is prioritized?`
+            content: `Fleet analysis complete! I found ${data.length} tables in your ${profileId} fleet. The top optimization opportunity is **${topRec?.tableName}** with potential savings of **$${topRec?.totalSavings}/mo**. Would you like me to explain why this table is prioritized?`
         }]);
     };
 
