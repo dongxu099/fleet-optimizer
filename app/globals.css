@@ -161,7 +161,27 @@ body::before {
 
 .navbar-profiles {
   display: flex;
+  align-items: center;
   gap: 8px;
+}
+
+.navbar-hint {
+  font-size: 13px;
+  color: var(--accent-orange);
+  margin-right: 8px;
+  animation: pulse-hint 2s infinite;
+}
+
+@keyframes pulse-hint {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
 }
 
 /* =====================================================

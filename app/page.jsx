@@ -177,6 +177,9 @@ export default function HomePage() {
                 </div>
 
                 <div className="navbar-profiles">
+                    {!activeProfile && (
+                        <span className="navbar-hint">👉 Click a profile to start:</span>
+                    )}
                     {PROFILES.map(profile => (
                         <button
                             key={profile.id}
