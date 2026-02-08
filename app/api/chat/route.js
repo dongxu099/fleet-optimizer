@@ -1,11 +1,5 @@
 import OpenAI from 'openai';
 
-// AI_BUILDER_TOKEN is automatically injected during deployment
-const openai = new OpenAI({
-    baseURL: 'https://space.ai-builders.com/backend/v1',
-    apiKey: process.env.AI_BUILDER_TOKEN,
-});
-
 const SYSTEM_PROMPT = `You are a Senior Solutions Architect specializing in Amazon DynamoDB optimization. You're helping analyze a simulated fleet of DynamoDB tables to identify cost-saving opportunities.
 
 Your expertise includes:
@@ -24,6 +18,19 @@ When responding:
 5. Explain the "why" behind each recommendation
 
 Format your responses in markdown for clarity.`;
+
+// Lazy initialization to avoid build-time errors
+let openaiClient = null;
+
+function getOpenAIClient() {
+    if (!openaiClient) {
+        openaiClient = new OpenAI({
+            baseURL: 'https://space.ai-builders.com/backend/v1',
+            apiKey: process.env.AI_BUILDER_TOKEN,
+        });
+    }
+    return openaiClient;
+}
 
 export async function POST(request) {
     try {
@@ -45,6 +52,7 @@ ${context.topRecommendations?.map((rec, i) =>
             ).join('\n') || 'No recommendations yet'}`;
         }
 
+        const openai = getOpenAIClient();
         const completion = await openai.chat.completions.create({
             model: 'grok-4-fast',
             messages: [
