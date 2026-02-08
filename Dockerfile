@@ -22,13 +22,13 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-# Copy necessary files from builder
+# Copy necessary files from builder (public may or may not exist)
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
-# Expose port (PORT will be set at runtime by Koyeb)
+# Expose port
 EXPOSE 3000
 
-# Start application using PORT environment variable
-CMD sh -c "node server.js"
+# Start application - Next.js standalone reads PORT env var automatically
+CMD ["node", "server.js"]
