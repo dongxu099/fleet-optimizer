@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Database, TrendingDown, AlertTriangle, Zap, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { Database, TrendingDown, AlertTriangle, Zap, ChevronDown, ChevronUp, ArrowRight, HelpCircle } from 'lucide-react';
 import { generateFleetData, calculateFleetStats, PROFILES } from '@/lib/fleetData';
 import { generateRecommendations, formatCurrency, getWasteCategory } from '@/lib/optimizationEngine';
 
@@ -279,9 +279,16 @@ export default function HomePage() {
                                             <th
                                                 onClick={() => handleSort('wasteScore')}
                                                 className={sortConfig.key === 'wasteScore' ? 'sorted' : ''}
-                                                title="Waste Score = (1 - Utilization%) × Cost Weight. Higher scores indicate tables with low utilization and high spend – top candidates for optimization."
                                             >
-                                                Waste Score {sortConfig.key === 'wasteScore' && (sortConfig.direction === 'desc' ? <ChevronDown size={12} /> : <ChevronUp size={12} />)}
+                                                Waste Score
+                                                <span
+                                                    className="help-icon"
+                                                    title="Waste Score = (1 - Utilization%) × Cost Weight. Higher scores indicate tables with low utilization and high spend – top candidates for optimization."
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <HelpCircle size={12} />
+                                                </span>
+                                                {sortConfig.key === 'wasteScore' && (sortConfig.direction === 'desc' ? <ChevronDown size={12} /> : <ChevronUp size={12} />)}
                                             </th>
                                             <th onClick={() => handleSort('monthlySpend')} className={sortConfig.key === 'monthlySpend' ? 'sorted' : ''}>
                                                 Monthly Cost {sortConfig.key === 'monthlySpend' && (sortConfig.direction === 'desc' ? <ChevronDown size={12} /> : <ChevronUp size={12} />)}
